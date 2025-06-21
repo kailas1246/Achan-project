@@ -1,6 +1,22 @@
-const IssuedProduct = require("../models/IssuedProduct");
+import IssuedProduct from "../models/IssuedProduct.js";
 
-exports.getIssuedProducts = async (req, res) => {
+export const deleteIssuedProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const deleted = await IssuedProduct.findByIdAndDelete(id);
+    if (!deleted) {
+      return res.status(404).json({ message: "Issued product not found" });
+    }
+
+    res.status(200).json({ message: "Issued product deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting issued product:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const getIssuedProducts = async (req, res) => {
   try {
     const { startDate, endDate } = req.query;
     let filter = {};
@@ -19,7 +35,7 @@ exports.getIssuedProducts = async (req, res) => {
   }
 };
 
-exports.createIssuedProduct = async (req, res) => {
+export const createIssuedProduct = async (req, res) => {
   try {
     const { productId, name, quantity, unit, issuedTo } = req.body;
 
