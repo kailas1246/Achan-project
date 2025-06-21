@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import authRoutes from "./routes/Authroutes.js";
 import productRoutes from "./routes/products.js";
+import issuedProductRoutes from "./routes/issuedProducts.js";
 dotenv.config();
 
 const app = express();
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/issued-products", issuedProductRoutes);
 
 // 404 handler
 app.use((req, res) => {
