@@ -1,5 +1,5 @@
 const express = require("express")
-import mongoose from "mongoose";
+const mongoose = require("mongoose")
 import dotenv from "dotenv";
 import cors from "cors";
 import authRoutes from "./routes/Authroutes.js";
