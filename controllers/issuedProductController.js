@@ -1,4 +1,4 @@
-import IssuedProduct from "../models/IssuedProduct.js";
+import IssuedProduct from "../models/IssuedProducts.js";
 import Product from "../models/Product.js";
 
 export const deleteIssuedProduct = async (req, res) => {
