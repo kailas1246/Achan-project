@@ -57,7 +57,6 @@ export const createIssuedProduct = async (req, res) => {
       productId,
       name,
       quantity,
-      unit,
       issuedTo,
     });
     await issuedProduct.save();
