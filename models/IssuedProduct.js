@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose = from "mongoose";
 
 const IssuedProductSchema = new mongoose.Schema({
   productId: {
