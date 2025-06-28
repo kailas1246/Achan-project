@@ -13,4 +13,4 @@ const IssuedProductSchema = new mongoose.Schema({
   issuedAt: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model("IssuedProduct", IssuedProductSchema);
+export default mongoose.model("IssuedProduct", IssuedProductSchema);
