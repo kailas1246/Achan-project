@@ -1,10 +1,10 @@
 import express from "express";
 const router = express.Router();
-const {
+import {
   createIssuedProduct,
   getIssuedProducts,
   deleteIssuedProduct,
-} = require("../controllers/issuedProductController.js");
+} from"../controllers/issuedProductController.js"
 
 router.post("/", createIssuedProduct);
 router.get("/", getIssuedProducts);
