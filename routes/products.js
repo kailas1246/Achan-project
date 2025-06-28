@@ -8,6 +8,30 @@ router.get("/", async (req, res) => {
   const products = await Product.find();
   res.json(products);
 });
+// POST bulk import
+router.post("/import", async (req, res) => {
+  try {
+    const products = req.body;
+
+    const operations = products.map((item) => ({
+      updateOne: {
+        filter: { name: item.name, provider: item.provider }, // or `_id` if available
+        update: { $set: item },
+        upsert: true, // will insert if not found
+      },
+    }));
+
+    await Product.bulkWrite(operations);
+
+    res
+      .status(200)
+      .json({ message: "Products imported or updated successfully." });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to import products" });
+  }
+});
+
 
 // POST add new product
 router.post("/", async (req, res) => {
