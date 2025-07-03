@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const IssuedProductSchema = new mongoose.Schema({
   productId: {
@@ -11,6 +11,7 @@ const IssuedProductSchema = new mongoose.Schema({
   unit: { type: String, required: true },
   issuedTo: { type: String, required: true },
   issuedAt: { type: Date, default: Date.now },
+  remarks: String,
 });
 
-export default mongoose.model("IssuedProduct", IssuedProductSchema);
+module.exports = mongoose.model("IssuedProduct", IssuedProductSchema);
