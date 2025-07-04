@@ -8,6 +8,7 @@ const ProductSchema = new mongoose.Schema(
     remarks: { type: String },
     status: { type: String, enum: ["sold", "not sold"], default: "not sold" },
     provider: { type: String, required: true },
+    date: { type: Date, required: true },
   },
   { timestamps: true }
 );
