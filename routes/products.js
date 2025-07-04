@@ -8,6 +8,24 @@ router.get("/", async (req, res) => {
   const products = await Product.find();
   res.json(products);
 });
+
+// POST add new product
+router.post("/", async (req, res) => {
+  try {
+    const data = { ...req.body };
+
+    if (data.date) {
+      data.createdAt = new Date(data.date);
+    }
+
+    const product = new Product(data);
+    await product.save();
+    res.status(201).json(product);
+  } catch (err) {
+    res.status(400).json({ error: "Failed to add product" });
+  }
+});
+
 // POST bulk import
 router.post("/import", async (req, res) => {
   try {
@@ -29,18 +47,6 @@ router.post("/import", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to import products" });
-  }
-});
-
-
-// POST add new product
-router.post("/", async (req, res) => {
-  try {
-    const product = new Product(req.body);
-    await product.save();
-    res.status(201).json(product);
-  } catch (err) {
-    res.status(400).json({ error: "Failed to add product" });
   }
 });
 
