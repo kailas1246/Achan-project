@@ -38,9 +38,10 @@ export const getIssuedProducts = async (req, res) => {
 
 export const createIssuedProduct = async (req, res) => {
   try {
-    const { productId, name, quantity, unit, issuedTo, remarks } = req.body; 
+    const { productId, name, quantity, unit, issuedTo, remarks, issueDate } =
+      req.body;
 
-    if (!productId || !name || !quantity || !unit || !issuedTo) {
+    if (!productId || !name || !quantity || !unit || !issuedTo || !issueDate) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -60,6 +61,7 @@ export const createIssuedProduct = async (req, res) => {
       unit,
       issuedTo,
       remarks,
+      issueDate: new Date(issueDate),
     });
     await issuedProduct.save();
 
