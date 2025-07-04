@@ -12,17 +12,45 @@ router.get("/", async (req, res) => {
 // POST add new product
 router.post("/", async (req, res) => {
   try {
-    const data = { ...req.body };
+    const { name, quantity, unit, remarks, status, provider, date } = req.body;
 
-    if (data.date) {
-      data.createdAt = new Date(data.date);
+    // Find existing product by name
+    const existingProduct = await Product.findOne({ name });
+
+    if (existingProduct) {
+      // Add new quantity to old quantity
+      existingProduct.quantity =
+        Number(existingProduct.quantity) + Number(quantity);
+
+      // Replace remarks with new one
+      existingProduct.remarks = remarks;
+
+      // Optionally update provider, status, unit, date
+      existingProduct.provider = provider;
+      existingProduct.status = status;
+      existingProduct.unit = unit;
+      existingProduct.date = date;
+
+      await existingProduct.save();
+      return res.status(200).json(existingProduct);
     }
 
-    const product = new Product(data);
-    await product.save();
-    res.status(201).json(product);
+    // If product doesn't exist, create new one
+    const newProduct = new Product({
+      name,
+      quantity,
+      unit,
+      remarks,
+      status,
+      provider,
+      date,
+    });
+
+    const savedProduct = await newProduct.save();
+    res.status(201).json(savedProduct);
   } catch (err) {
-    res.status(400).json({ error: "Failed to add product" });
+    console.error(err);
+    res.status(500).json({ message: "Failed to save product" });
   }
 });
 
