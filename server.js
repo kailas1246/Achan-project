@@ -1,10 +1,11 @@
-import express from"express"
-import mongoose from"mongoose"
+import express from "express";
+import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import authRoutes from "./routes/Authroutes.js";
 import productRoutes from "./routes/products.js";
 import issuedProductRoutes from "./routes/issuedProducts.js";
+import vehicleRoutes from "./routes/vehicles.js";
 dotenv.config();
 
 const app = express();
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/issued-products", issuedProductRoutes);
+app.use("/api/vehicles", vehicleRoutes);
 
 // 404 handler
 app.use((req, res) => {
