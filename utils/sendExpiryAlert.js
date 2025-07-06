@@ -63,4 +63,4 @@ const sendExpiryAlert = async (vehicle) => {
   }
 };
 
-exdport default sendExpiryAlert;
+export default sendExpiryAlert;
