@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
 const sendExpiryAlert = async (vehicle) => {
   try {
